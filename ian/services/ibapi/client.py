@@ -1,5 +1,7 @@
 from ibapi.client import *
 from ibapi.wrapper import *
+from ibapi.tag_value import TagValue
+from ibapi.contract import ComboLeg
 import time
 import threading
 from ibapi.ticktype import TickTypeEnum
@@ -67,5 +69,20 @@ class TestApp(EClient, EWrapper):
 
     def execDetails(self, reqId: int, contract: Contract, execution: Execution):
         print(f"Exec details: {reqId} {contract} {execution}")
+
+    def updateAccountValue(self, key: str, value: str, currency: str, accountName: str):
+        print(f"Update account value: {key} {value} {currency} {accountName}")
+
+    def updatePortfolio(self, contract: Contract, position: float, marketPrice: float, marketValue: float, averageCost: float, unrealizedPNL: float, realizedPNL: float, accountName: str):
+        print(f"Update portfolio: {contract} {position} {marketPrice} {marketValue} {averageCost} {unrealizedPNL} {realizedPNL} {accountName}")
+
+    def updateAccountTime(self, timeStamp: str):
+        print(f"Update account time: {timeStamp}")
+
+    def managedAccounts(self, accountsList: str):
+        print(f"Managed accounts: {accountsList}")
+
+    def accountDownloadEnd(self, accountName: str):
+        print(f"Account download end: {accountName}")
 
 app = TestApp()
